@@ -1,0 +1,38 @@
+[
+    {
+        "id": 0,
+        "title": "Test",
+        "lang1": {
+            "code": "en",
+            "words": [
+                { "id": 0, "word": "pavement", "synonyms": ["sidewalk"]},
+                { "id": 1, "word": "building"}
+            ]
+        },
+        "lang2": {
+            "code": "nl",
+            "words": [
+                { "id": 0, "word": "stoep", "synonyms": ["trottoir"]},
+                { "id": 1, "word": "gebouw", "synonyms": ["establissement"]}
+            ]
+        }
+    },
+    {
+        "id": 1,
+        "title": "Not a test",
+        "lang1": {
+            "code": "en",
+            "words": [
+                { "id": 0, "word": "boat", "synonyms": ["vessel"]},
+                { "id": 1, "word": "building"}
+            ]
+        },
+        "lang2": {
+            "code": "nl",
+            "words": [
+                { "id": 0, "word": "boot"},
+                { "id": 1, "word": "gebouw", "synonyms": ["establissement"]}
+            ]
+        }
+    }
+]
