@@ -1,15 +1,7 @@
 <template>
 <v-layout justify-center align-center>
     <v-container justify-center align-center>
-        <v-row justify="center">
-            <h1>{{ list.title }}</h1>
-        </v-row>
-        <v-row justify="center">
-            <p>Amount of words: {{ list.lang1.words.length }}</p>
-        </v-row>
-        <v-row justify="center">
-            <v-btn large color="primary">Start</v-btn>
-        </v-row>
+        <h1>{{word}}</h1>
     </v-container>
 </v-layout>
 </template>
@@ -21,8 +13,9 @@ export default {
     async asyncData({ req, route }) {
         const lists = await getLists();
         const list = lists.find(l => l.id === route.params.id);
+        const word = list.lang1.words[route.params.word].word;
 
-        return { list };
+        return { list, word };
     }
 }
 </script>

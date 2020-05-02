@@ -6,11 +6,14 @@
           color="#385F73"
           dark
           v-for="list in lists" :key="list.id" class="mb-4">
-          <v-card-title class="pl-3">{{list.title}}</v-card-title>
+          <v-list-item-content>
+            <v-card-title class="pl-3">{{list.title}}</v-card-title>
+            <v-list-item-subtitle class="pl-3">{{list.lang1.code}} >> {{list.lang2.code}} - {{list.lang1.words.length}} words</v-list-item-subtitle>
 
-          <v-card-actions>
-            <v-btn text @click="goToList(list.id)">Start now</v-btn>
-          </v-card-actions>
+            <v-card-actions>
+              <v-btn text @click="goToList(list.id)">Start now</v-btn>
+            </v-card-actions>
+          </v-list-item-content>
       </v-card>
     </v-col>
   </v-row>
