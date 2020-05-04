@@ -5,7 +5,7 @@
             <h1>{{this.capitalise(word.word)}}</h1>
         </v-row>
         <v-row class="mt-4" justify="center">
-            <v-col cols="4">
+            <v-col cols="10" md="4">
                 <v-text-field outlined clearable autofocus :error-count="100" :readonly="trueAnswer" label="Translation" id="input" v-model="input" :error="falseAnswer" :success="trueAnswer"></v-text-field>
             </v-col>
         </v-row>
@@ -21,18 +21,24 @@
 </template>
 
 <script>
-const getLists = () => import('~/data/lists.json').then(m => m.default || m);
-
+import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
     async asyncData({ req, route }) {
-        const lists = await getLists();
-        const list = lists.find(l => l.id === route.params.id);
-        const word = list.lang1.words[route.params.word];
+        const counter = route.params.word;
 
-        return { list, word };
+        return { counter };
+    },
+    created() {
+        this.list = this.getList.list;
+        this.word = this.list.lang1.words[this.counter];
     },
     methods: {
+        ...mapActions({
+            addWordsToStack: 'list/addWordsToStack'
+        }),
         capitalise(word) {
+            console.log(this.word);
             return word.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase());
         },
         checkAnswer() {
@@ -55,11 +61,21 @@ export default {
             this.snackbar = true;
         },
         next(points) {
-            this.$router.push({ name: "lists-id-words-word", params: { word: this.word.id + 1, id: this.list.id } });
+            if (points === 0) {
+                this.addWordsToStack({ word1: this.word, word2: this.list.lang2.words[this.word.id] });
+            }
+            if (this.getList.list.lang1.words[this.counter + 1]) {
+                this.$router.push({ name: "lists-id-words-word", params: { word: this.counter + 1, id: this.list.id } });
+            } else {
+                this.$router.push({ name: "lists-id-completed", params: { id: this.list.id } });
+            }
+            
         }
     },
     data: () => {
         return {
+            word: '',
+            list: {},
             input: '',
             falseAnswer: false,
             trueAnswer: false,
@@ -67,6 +83,11 @@ export default {
             snackbarText: '',
             tries: 0
         }
-    }
+    },
+  computed: {
+    ...mapGetters({
+      getList: 'list/getList'
+    })
+  }
 }
 </script>
