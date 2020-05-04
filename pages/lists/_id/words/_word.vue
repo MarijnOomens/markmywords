@@ -6,13 +6,14 @@
         </v-row>
         <v-row class="mt-4" justify="center">
             <v-col cols="4">
-                <v-text-field outlined clearable autofocus :readonly="trueAnswer" label="Translation" id="input" v-model="input" :error="falseAnswer" :error-messages="errors" :success="trueAnswer"></v-text-field>
+                <v-text-field outlined clearable autofocus :error-count="100" :readonly="trueAnswer" label="Translation" id="input" v-model="input" :error="falseAnswer" :success="trueAnswer"></v-text-field>
             </v-col>
         </v-row>
         <v-row justify="center">
             <v-btn v-if="!trueAnswer" large color="primary" @click="checkAnswer()">Submit</v-btn>
             <v-btn v-if="trueAnswer" large color="primary" @click="next(1)">Next</v-btn>
             <v-btn v-if="falseAnswer" class="ml-2" large color="secondary" @click="next(0)">Skip</v-btn>
+            <v-btn v-if="falseAnswer" class="ml-2" color="green" large @click="next(1)">Mark correct</v-btn>
         </v-row>
     </v-container>
     <v-snackbar v-model="snackbar" bottom right :timeout="3000">{{snackbarText}}</v-snackbar>
@@ -35,6 +36,11 @@ export default {
             return word.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase());
         },
         checkAnswer() {
+            if (!this.input) {
+                this.snackbarText = 'Please fill in a translation!';
+                this.snackbar = true;
+                return;
+            }
             if (this.input.toLowerCase() === this.list.lang2.words[this.word.id].word) {
                 if (this.falseAnswer) {
                     this.falseAnswer = false;
@@ -42,14 +48,9 @@ export default {
                 this.trueAnswer = true;
                 this.snackbarText = 'That was the correct answer!';
             } else {
-                this.falseAnswer = true;
                 this.snackbarText = 'That was the wrong answer!';
                 this.tries++;
-                if (this.errors[0]) {
-                    this.errors[0] = 'Tries: ' + this.tries;
-                } else {
-                    this.errors.push('Tries: ' + this.tries);
-                }
+                this.falseAnswer = true;
             }
             this.snackbar = true;
         },
@@ -64,8 +65,7 @@ export default {
             trueAnswer: false,
             snackbar: false,
             snackbarText: '',
-            tries: 0,
-            errors: []
+            tries: 0
         }
     }
 }
