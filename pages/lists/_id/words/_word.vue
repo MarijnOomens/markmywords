@@ -6,7 +6,9 @@
         </v-row>
         <v-row class="mt-4" justify="center">
             <v-col cols="10" md="4">
-                <v-text-field outlined clearable autofocus :error-count="100" :readonly="trueAnswer" label="Translation" id="input" v-model="input" :error="falseAnswer" :success="trueAnswer"></v-text-field>
+                <form @submit.prevent="checkAnswer()">
+                    <v-text-field outlined clearable autofocus :error-count="100" :readonly="trueAnswer" label="Translation" id="input" v-model="input" :error="falseAnswer" :success="trueAnswer"></v-text-field>
+                </form>
             </v-col>
         </v-row>
         <v-row justify="center">
@@ -42,6 +44,9 @@ export default {
             return word.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase());
         },
         checkAnswer() {
+            if (this.trueAnswer) {
+                this.next(1);
+            }
             if (!this.input) {
                 this.snackbarText = 'Please fill in a translation!';
                 this.snackbar = true;
