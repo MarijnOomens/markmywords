@@ -2,7 +2,8 @@
 <v-layout justify-center align-center>
     <v-container justify-center align-center>
         <v-row justify="center">
-            <h1>{{this.capitalise(word.word)}}</h1>
+            <h1 v-if="!revealed">{{this.capitalise(word.word)}}</h1>
+            <h1 v-if="revealed">{{this.capitalise(this.list.lang2.words[this.counter].word)}}</h1>
         </v-row>
         <v-row class="mt-4" justify="center">
             <v-col cols="10" md="4">
@@ -12,7 +13,9 @@
             </v-col>
         </v-row>
         <v-row justify="center">
-            <v-btn v-if="!trueAnswer" large color="primary" @click="checkAnswer()">Submit</v-btn>
+            <v-btn v-if="!trueAnswer && !falseAnswer" large color="primary" @click="checkAnswer()">Submit</v-btn>
+            <v-btn v-if="falseAnswer && !revealed" large color="primary" @click="reveal(1)">Reveal</v-btn>
+            <v-btn v-if="revealed" large color="primary" @click="reveal(0)">Original</v-btn>
             <v-btn v-if="trueAnswer" large color="primary" @click="next(1)">Next</v-btn>
             <v-btn v-if="falseAnswer" class="ml-2" large color="secondary" @click="next(0)">Skip</v-btn>
             <v-btn v-if="falseAnswer" class="ml-2" color="green" large @click="next(1)">Mark correct</v-btn>
@@ -74,7 +77,13 @@ export default {
             } else {
                 this.$router.push({ name: "lists-id-completed", params: { id: this.list.id } });
             }
-            
+        },
+        reveal(int) {
+            if (int === 1) {
+                this.revealed = true;
+            } else {
+                this.revealed = false;
+            }
         }
     },
     data: () => {
@@ -86,7 +95,8 @@ export default {
             trueAnswer: false,
             snackbar: false,
             snackbarText: '',
-            tries: 0
+            tries: 0,
+            revealed: false
         }
     },
   computed: {
