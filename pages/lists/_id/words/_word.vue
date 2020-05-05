@@ -8,7 +8,7 @@
         <v-row class="mt-4" justify="center">
             <v-col cols="10" md="4">
                 <form @submit.prevent="checkAnswer()">
-                    <v-text-field outlined clearable autofocus :error-count="100" :readonly="trueAnswer" label="Translation" id="input" v-model="input" :error="falseAnswer" :success="trueAnswer"></v-text-field>
+                    <v-text-field outlined clearable autofocus :error-count="100" :readonly="trueAnswer || falseAnswer" label="Translation" id="input" v-model="input" :error="falseAnswer" :success="trueAnswer"></v-text-field>
                 </form>
             </v-col>
         </v-row>
