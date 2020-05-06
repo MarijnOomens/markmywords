@@ -41,7 +41,7 @@
     </v-dialog>
 
     <v-btn color="primary" class="mb-12" small dark absolute bottom right fab>
-      <v-icon>mdi-plus</v-icon>
+      <nuxt-link to="/manage/create"><v-icon>mdi-plus</v-icon></nuxt-link>
     </v-btn>
   </v-container>
 </template>
@@ -66,3 +66,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+a {
+  text-decoration: none;
+  color: white;
+}
+</style>
