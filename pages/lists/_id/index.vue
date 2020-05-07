@@ -15,18 +15,21 @@
 </template>
 
 <script>
-const getLists = () => import("~/data/lists.json").then(m => m.default || m);
-
 export default {
-  async asyncData({ req, route }) {
-    const lists = await getLists();
-    const list = lists.find(l => l.id === route.params.id);
-
-    return { list };
+  mounted() {
+    const lists = localStorage.getItem("lists");
+    if (lists) {
+      this.list = lists.find(l => l.id === route.params.id);
+    }
   },
   methods: {
     goToWord() {
       this.$router.push({ name: "lists-id-words-word", params: { word: 0, id: this.list.id } });
+    }
+  },
+  data: () => {
+    return {
+      list: {}
     }
   }
 };

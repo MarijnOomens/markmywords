@@ -81,7 +81,7 @@ export default {
         "Thai",
         "Korean"
       ],
-      rules: [v => v.length <= 30 || "Max 30 characters"]
+      rules: [v => v.length <= 20 || "Max 20 characters"]
     };
   },
   methods: {
@@ -90,13 +90,24 @@ export default {
       const firstLanguage = this.firstLanguage;
       const secondLanguage = this.secondLanguage;
       if (title && firstLanguage && secondLanguage) {
+        let lists = JSON.parse(localStorage.getItem("lists"));
+        let id = 0;
+        if(lists[0]) {
+          id = lists.length;
+        } else {
+          lists = [];
+        }
+
         const newList = {
+          id: id,
           title: title,
-          lang1: firstLanguage,
-          lang2: secondLanguage
+          lang1: { code: firstLanguage, words: [] },
+          lang2: { code: secondLanguage, words: [] }
         };
 
-        localStorage.setItem("lists", JSON.stringify(newList));
+        lists.push(newList);
+
+        localStorage.setItem("lists", JSON.stringify(lists));
         this.$router.push({ name: "manage" });
       }
     }
