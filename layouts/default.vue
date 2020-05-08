@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <UIMenuBar />
-    <nuxt />
+    <nuxt class="mb-5"/>
     <UIFooter />
   </v-app>
 </template>
