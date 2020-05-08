@@ -40,7 +40,6 @@ export default {
             addWordsToStack: 'list/addWordsToStack'
         }),
         capitalise(word) {
-            console.log(this.word);
             return word.replace(/(?:^|\s|-)\S/g, x => x.toUpperCase());
         },
         checkAnswer() {
@@ -52,7 +51,7 @@ export default {
                 this.snackbar = true;
                 return;
             }
-            if (this.input.toLowerCase() === this.list.lang2.words[this.counter].word) {
+            if (this.input.toLowerCase() === this.list.lang2.words[this.counter].word.toLowerCase()) {
                 if (this.falseAnswer) {
                     this.falseAnswer = false;
                 }

@@ -15,13 +15,20 @@
 </template>
 
 <script>
-const getLists = () => import('~/data/lists.json').then(m => m.default || m);
 export default {
     async asyncData({ req, route }) {
-        const lists = await getLists();
-        const list = lists.find(l => l.id === route.params.id);
+        const id = route.params.id;
 
-        return { list };
+        return { id };
+    },
+    created() {
+        const lists = JSON.parse(localStorage.getItem("lists"));
+        this.list = lists.find(l => l.id === this.id);
+    },
+    data: () => {
+        return {
+            list: {}
+        }
     }
 }
 </script>

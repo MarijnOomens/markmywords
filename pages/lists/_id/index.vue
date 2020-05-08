@@ -16,10 +16,15 @@
 
 <script>
 export default {
-  mounted() {
-    const lists = localStorage.getItem("lists");
+  async asyncData({ route, params }) {
+    const id = route.params.id;
+
+    return { id: id };
+  },
+  created() {
+    const lists = JSON.parse(localStorage.getItem("lists"));
     if (lists) {
-      this.list = lists.find(l => l.id === route.params.id);
+      this.list = lists.find(l => l.id === this.id);
     }
   },
   methods: {
