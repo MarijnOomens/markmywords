@@ -111,6 +111,16 @@ export default {
       list.lang1.words = this.words.lang1;
       list.lang2.words = this.words.lang2;
 
+      list.lang1.words.forEach(word => {
+        if (word.word === "") {
+          const index = list.lang1.words.indexOf(word);
+          if (index > -1) {
+            list.lang1.words.splice(index, 1);
+            list.lang2.words.splice(index, 1);
+          }
+        }
+      });
+
       lists[list.id] = list;
 
       localStorage.setItem("lists", JSON.stringify(lists));
