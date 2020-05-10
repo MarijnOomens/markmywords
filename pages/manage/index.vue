@@ -4,7 +4,7 @@
       <v-col cols="12" md="6">
         <v-list two-line subheader>
           <v-subheader>Word lists</v-subheader>
-          <v-list-item-group color="primary">
+          <v-list-item-group color="secondary">
             <v-divider />
             <div v-for="list in lists" :key="list.id">
               <v-list-item>
@@ -47,8 +47,8 @@
       </v-card>
     </v-dialog>
 
-    <v-btn color="primary" class="mb-12" small dark absolute bottom right fab>
-      <nuxt-link to="/manage/create"><v-icon>mdi-plus</v-icon></nuxt-link>
+    <v-btn color="secondary" class="fab" small dark absolute fab>
+      <nuxt-link to="/manage/create"><v-icon color="white">mdi-plus</v-icon></nuxt-link>
     </v-btn>
   </v-container>
 </template>
@@ -96,5 +96,10 @@ export default {
 a {
   text-decoration: none;
   color: white;
+}
+
+.fab {
+  right: 25px;
+   bottom: 55px;
 }
 </style>

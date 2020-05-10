@@ -8,7 +8,7 @@
         <p>Amount of words: {{ list.lang1.words.length }}</p>
       </v-row>
       <v-row justify="center">
-        <v-btn large color="primary" @click="goToWord()">Start</v-btn>
+        <v-btn large color="secondary" @click="goToWord()">Start</v-btn>
       </v-row>
     </v-container>
   </v-layout>

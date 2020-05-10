@@ -41,7 +41,7 @@
       </v-row>
       <v-row justify="center">
         <v-col cols="12" md="4">
-          <v-btn large color="primary" @click="createList()">Create</v-btn>
+          <v-btn large color="secondary" @click="createList()">Create</v-btn>
         </v-col>
       </v-row>
     </form>
@@ -108,7 +108,7 @@ export default {
         lists.push(newList);
 
         localStorage.setItem("lists", JSON.stringify(lists));
-        this.$router.push({ name: "manage" });
+        this.$router.push({ name: "manage-id", params: { id: newList.id } });
       }
     }
   }

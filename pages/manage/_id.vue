@@ -64,7 +64,7 @@
     </div>
     <v-row justify="center">
       <v-col cols="12" md="4">
-        <v-btn large color="primary" @click="addWord()">Add word</v-btn>
+        <v-btn large color="secondary" @click="addWord()">Add word</v-btn>
         <v-btn class="ml-2" large color="green" @click="save()">Save</v-btn>
       </v-col>
     </v-row>
@@ -103,6 +103,10 @@ export default {
     save() {
       const lists = this.lists;
       let list = this.list;
+
+      list.title = this.title;
+      list.lang1.code = this.firstLanguage;
+      list.lang2.code = this.secondLanguage;
 
       list.lang1.words = this.words.lang1;
       list.lang2.words = this.words.lang2;

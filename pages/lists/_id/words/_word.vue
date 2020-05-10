@@ -13,11 +13,11 @@
             </v-col>
         </v-row>
         <v-row justify="center">
-            <v-btn v-if="!trueAnswer && !falseAnswer" large color="primary" @click="checkAnswer()">Submit</v-btn>
-            <v-btn v-if="falseAnswer && !revealed" large color="primary" @click="reveal(1)">Reveal</v-btn>
-            <v-btn v-if="revealed" large color="primary" @click="reveal(0)">Original</v-btn>
-            <v-btn v-if="trueAnswer" large color="primary" @click="next(1)">Next</v-btn>
-            <v-btn v-if="falseAnswer" class="ml-2" large color="secondary" @click="next(0)">Skip</v-btn>
+            <v-btn v-if="!trueAnswer && !falseAnswer" large color="secondary" @click="checkAnswer()">Submit</v-btn>
+            <v-btn v-if="falseAnswer && !revealed" large color="secondary" @click="reveal(1)">Reveal</v-btn>
+            <v-btn v-if="revealed" large color="secondary" @click="reveal(0)">Original</v-btn>
+            <v-btn v-if="trueAnswer" large color="secondary" @click="next(1)">Next</v-btn>
+            <v-btn v-if="falseAnswer" class="ml-2" large color="primary" @click="next(0)">Skip</v-btn>
             <v-btn v-if="falseAnswer" class="ml-2" color="green" large @click="next(1)">Mark correct</v-btn>
         </v-row>
     </v-container>

@@ -8,7 +8,7 @@
                 <p>{{ list.title }}</p>
             </v-row>
             <v-row justify="center">
-                <nuxt-link to="/"><v-btn color="primary">Home</v-btn></nuxt-link>
+                <nuxt-link to="/"><v-btn color="secondary">Home</v-btn></nuxt-link>
             </v-row>
         </v-container>
     </v-layout>
