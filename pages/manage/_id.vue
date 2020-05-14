@@ -125,10 +125,7 @@ export default {
           }
         }
       });
-      console.log(lists);
-      console.log(list);
       lists[list.id] = list;
-      console.log(lists);
 
       localStorage.setItem("lists", JSON.stringify(lists));
     },

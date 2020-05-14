@@ -64,7 +64,6 @@ export default {
       localStorage.setItem("lists", JSON.stringify([]));
       this.lists = JSON.parse(localStorage.getItem("lists"));
     }
-    console.log(this.lists);
     this.lists.forEach(list => {
       this.random.push(true);
     });
