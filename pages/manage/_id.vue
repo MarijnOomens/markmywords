@@ -63,9 +63,10 @@
       </v-row>
     </div>
     <v-row justify="center">
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="4" class="buttons d-flex">
         <v-btn large color="secondary" @click="addWord()">Add word</v-btn>
-        <v-btn class="ml-2" large color="green" @click="save()">Save</v-btn>
+        <v-btn class="ml-2 save" large color="green" @click="saveAndNavigate()">Save</v-btn>
+        <v-btn class="ml-auto right" large color="black" @click="importpage()">Import/export</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -100,6 +101,10 @@ export default {
         this.words.lang1.push({ id: 0, word: "" });
       }
     },
+    saveAndNavigate() {
+      this.save();
+      this.$router.push({ name: "manage" });
+    },
     save() {
       const lists = this.lists;
       let list = this.list;
@@ -120,12 +125,16 @@ export default {
           }
         }
       });
-
+      console.log(lists);
+      console.log(list);
       lists[list.id] = list;
+      console.log(lists);
 
       localStorage.setItem("lists", JSON.stringify(lists));
-
-      this.$router.push({ name: "manage" });
+    },
+    importpage() {
+      this.save();
+      this.$router.push({ name: "manage-import", params: { id: this.id } });
     }
   },
   data: () => {
@@ -167,3 +176,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.right {
+  color: white !important;
+}
+
+.save {
+  color: white;
+}
+</style>
