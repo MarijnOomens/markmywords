@@ -122,6 +122,16 @@ export default {
           if (index > -1) {
             list.lang1.words.splice(index, 1);
             list.lang2.words.splice(index, 1);
+
+            list.lang1.words.forEach(w => {
+              const i = list.lang1.words.indexOf(w);
+              console.log(i);
+              console.log(index);
+              if(i + 1 > index) {
+                list.lang1.words[i].id = list.lang1.words[i].id - 1;
+                list.lang2.words[i].id = list.lang2.words[i].id - 1;
+              }
+            });
           }
         }
       });
