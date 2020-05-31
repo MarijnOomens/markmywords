@@ -17,7 +17,7 @@
             <v-btn v-if="falseAnswer && !revealed" large color="secondary" @click="reveal(1)">Reveal</v-btn>
             <v-btn v-if="revealed" large color="secondary" @click="reveal(0)">Original</v-btn>
             <v-btn v-if="trueAnswer" large color="secondary" @click="next(1)">Next</v-btn>
-            <v-btn v-if="falseAnswer" class="ml-2" large color="primary" @click="next(0)">Skip</v-btn>
+            <v-btn v-if="falseAnswer" class="ml-2" large color="info" @click="next(0)">Skip</v-btn>
             <v-btn v-if="falseAnswer" class="ml-2" color="green" large @click="next(1)">Mark correct</v-btn>
         </v-row>
     </v-container>
@@ -69,7 +69,16 @@ export default {
         },
         next(points) {
             if (points === 0) {
-                this.addWordsToStack({ word1: this.word, word2: this.list.lang2.words[this.word.id] });
+                let lang2word = {};
+                this.list.lang2.words.forEach(w => {
+                    if(w.id === this.word.id) {
+                        lang2word = w;
+                    }
+                });
+                this.addWordsToStack({ word1: this.word, word2: lang2word });
+                console.log(this.word.id);
+                console.log(this.list.lang1);
+                console.log(this.list.lang2);
             }
             if (this.getList.list.lang1.words[this.counter + 1]) {
                 this.$router.push({ name: "lists-id-words-word", params: { word: this.counter + 1, id: this.list.id } });
